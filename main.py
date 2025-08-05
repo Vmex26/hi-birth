@@ -10,8 +10,14 @@ import json
 def first_init(): #Esta funcion confirmara si es la primera ves que se ejecuta o no
     #si es la primera ves que se ejecuta llamara la funcion create_json para crear el archivo
     #donde este guardado el username y la fecha
-    pass 
-
+    username = getpass.getuser()
+    archive_path = os.path.join(os.path.expanduser("~"), ".config", "hibirth", f"{username}_data.json")
+    
+    if not os.path.exists(archive_path):
+        create_json()
+    else:
+        pass #Aqui en un futuro llamare a una funcion que se encarge de ya calcular los dias que faltan
+    
 def pedir_birth():
     # Aqui implementare la logica donde le pedire al usuario su fecha de cumpleaños
     while True:
