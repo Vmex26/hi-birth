@@ -58,4 +58,6 @@ def create_json(): #Esta funcion creara el json donde estara guardado el nombre 
    
 
 #pedir_birth() #Con esto pruebo que la funcion pedir_birth este correcta
-create_json() #Probrar que la funcion funcione correectamente 
+#create_json() #Probrar que la funcion funcione correectamente 
+first_init() #Probrar que la primera iniciacion funcione
+
