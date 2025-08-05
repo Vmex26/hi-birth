@@ -17,7 +17,7 @@ def first_init(): #Esta funcion confirmara si es la primera ves que se ejecuta o
         create_json()
     else:
         dias_restantes = calcular_dias_restantes() #Aqui en un futuro llamare a una funcion que se encarge de ya calcular los dias que faltan
-        print(f"Quedan {dias_restantes} para tu cumpleaños, ¡Se paciente!")
+        print(f"Quedan {dias_restantes} dias para tu cumpleaños {username}, ¡Se paciente!")
     
 def pedir_birth():
     # Aqui implementare la logica donde le pedire al usuario su fecha de cumpleaños
