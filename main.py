@@ -34,20 +34,25 @@ def pedir_birth():
     # Aqui implementare la logica donde le pedire al usuario su fecha de cumpleaños
     while True:
         #Se le pide al usuario el birthday
-        fecha = input("Introduce tu fecha de nacimiento DD/MM/YYYY (ejemplo: 31/12/2015): ") 
+        fecha = input("[¡] Introduce tu fecha de nacimiento DD/MM/YYYY (ejemplo: 31/12/2015): ") 
     
         try:
             #Comprobamos que la fecha este en el formato indicado
             birth = datetime.strptime(fecha, '%d/%m/%Y')
             if birth > datetime.today():
-                print("No puedes tener edad negativa o igual a 0")
+                print("[X] No puedes tener edad negativa o igual a 0\n")
                 continue
             else:
-                return fecha
+                confirm = input(f"[?] Entonces la fecha es {fecha} correcto? (Y/N)") 
+                
+                if confirm == "y" or confirm == "Y":
+                    return fecha
+                else:
+                    continue
         
         except ValueError:
             
-            print("Formato no reconocido, por favor intentalo denuevo")
+            print("[X] Formato no reconocido, por favor intentalo denuevo\n")
 
 
 def create_json(): 
@@ -112,6 +117,10 @@ def calcular_dias_restantes():
 #first_init() #Probrar que la primera iniciacion funcione, este seria el main del programa
 
 if __name__ == "__main__":
-    first_init() #Ejecutamos el script
+    try:    
+        first_init() #Ejecutamos el script
+    except KeyboardInterrupt:
+        print("\n[!] Saliendo...")
+        exit(1)
 
 
