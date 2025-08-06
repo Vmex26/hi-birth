@@ -10,7 +10,7 @@ Solo estara disponible para **Linux**  ~~por ahora~~
 ## Instalacion y ejecucion:
 
 1. Clona este repositorio:
-   ```shell
+   ```bash
    git clone https://github.com/Vmex26/hi-birth.git
    cd HiBirth
    ```

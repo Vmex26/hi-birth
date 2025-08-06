@@ -16,28 +16,46 @@ def first_init(): #Esta funcion confirmara si es la primera ves que se ejecuta o
     if not os.path.exists(archive_path):
         create_json()
     else:
-        dias_restantes = calcular_dias_restantes() #Aqui en un futuro llamare a una funcion que se encarge de ya calcular los dias que faltan
-        print(f"Quedan {dias_restantes} dias para tu cumpleaños {username}, ¡Se paciente!")
-    
+        dias_restantes = calcular_dias_restantes() #Aqui llamare a una funcion que se encarge de calcular los dias que faltan
+        
+        #Daremos diferentes prints dependiendo de cuantos dias faltan
+        if dias_restantes >= 20:
+            print(f"Quedan {dias_restantes} dias para tu cumpleaños {username}, ¡Se paciente!")
+        elif dias_restantes < 20 and dias_restantes > 1:
+            print(f"Quedan {dias_restantes} dias para tu cumpleaños ya no falta mucho {username}!")
+        elif dias_restantes == 1:
+            print(f"Mañana es tu cumpleaños! espero que tengas todo preparado para entonces {username}")
+        elif dias_restantes == 0:
+            print(f"FELIZ CUMPLEAÑOS {username} disfruta del dia!")
+        elif dias_restantes == 359:
+            print(f"Que tal te fue en tu cumpleaños de ayer {username}?")
+
 def pedir_birth():
     # Aqui implementare la logica donde le pedire al usuario su fecha de cumpleaños
     while True:
         #Se le pide al usuario el birthday
-        fecha = input("Introduce tu fecha de nacimiento DD/MM/YY (ejemplo: 31/12/2015): ") 
+        fecha = input("Introduce tu fecha de nacimiento DD/MM/YYYY (ejemplo: 31/12/2015): ") 
     
         try:
             #Comprobamos que la fecha este en el formato indicado
-            datetime.strptime(fecha, '%d/%m/%Y')
-            return fecha
+            birth = datetime.strptime(fecha, '%d/%m/%Y')
+            if birth > datetime.today():
+                print("No puedes tener edad negativa o igual a 0")
+                continue
+            else:
+                return fecha
         
         except ValueError:
             
             print("Formato no reconocido, por favor intentalo denuevo")
 
-def create_json(): #Esta funcion creara el json donde estara guardado el nombre y la fecha 
+
+def create_json(): 
+    #Esta funcion creara el json donde estara guardado el nombre y la fecha 
     username = getpass.getuser() #conseguimos el nombre de usuario
     
     fecha = pedir_birth() #llamamos a la funcion pedir_birth
+         
     
     datos = {
             "name" : f"{username}",
@@ -56,8 +74,9 @@ def create_json(): #Esta funcion creara el json donde estara guardado el nombre 
     with open(archive_path, "w") as archive: #Abrimos el archivo (o lo crea), y lo nombramos archive
         json.dump(datos, archive, indent=4) #dumpeamos (escribimos) los datos en el archivo con sangria bonita
    
-def calcular_dias_restantes():
 
+def calcular_dias_restantes():
+    #calculamos los dias que faltan para el proximo cumpleaños
     username = getpass.getuser()
     archive_path = os.path.join(os.path.expanduser("~"), ".config", "hibirth", f"{username}_data.json")
     
@@ -88,9 +107,11 @@ def calcular_dias_restantes():
     return dias_restantes
 
 
-
 #pedir_birth() #Con esto pruebo que la funcion pedir_birth este correcta
 #create_json() #Probrar que la funcion funcione correectamente 
+#first_init() #Probrar que la primera iniciacion funcione, este seria el main del programa
 
-first_init() #Probrar que la primera iniciacion funcione, este seria el main del programa
+if __name__ == "__main__":
+    first_init() #Ejecutamos el script
+
 
