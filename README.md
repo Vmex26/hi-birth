@@ -23,6 +23,6 @@ Solo estara disponible para **Linux**  ~~por ahora~~
 - En la **primera ejecución**, se te pedirá ingresar tu fecha de nacimiento.
 - En las siguientes ejecuciones, el programa te dirá **cuántos días faltan para tu cumpleaños**.
 
-Este es mi primer proyecto en github 
+- - -
 
 ¡Cualquier aporte funcional o de interés será **muy bien recibido**! Si tienes ideas o mejoras, no dudes en abrir un pull request o crear una issue.
