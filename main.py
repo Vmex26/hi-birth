@@ -4,6 +4,7 @@ import os
 import getpass
 from datetime import datetime
 import json
+from utils.colors import GREEN, RED, END, QST, FATAL #Se llama a las utilidades mas para decorar que funcionalidad
 
 #Esta funcion solo sera llamada si es que el usuario habre por primera ves el programa
 #o por si no hay un archivo de configuracion donde esten alojados los datos
@@ -22,12 +23,12 @@ def first_init(): #Esta funcion confirmara si es la primera ves que se ejecuta o
         #Daremos diferentes prints dependiendo de cuantos dias faltan
         if dias_restantes >= 20:
             print(f"Quedan {dias_restantes} dias para tu cumpleaños {username}, ¡Se paciente!")
-        elif dias_restantes < 20 and dias_restantes > 1:
+        elif dias_restantes < 10 and dias_restantes > 1:
             print(f"Quedan {dias_restantes} dias para tu cumpleaños ya no falta mucho {username}!")
         elif dias_restantes == 1:
-            print(f"Mañana es tu cumpleaños! espero que tengas todo preparado para entonces {username}")
+            print(GREEN + "Mañana es tu cumpleaños!" + END + f"espero que tengas todo preparado para entonces {username}")
         elif dias_restantes == 0:
-            print(f"FELIZ CUMPLEAÑOS {username} disfruta del dia!")
+            print(GREEN + "FELIZ CUMPLEAÑOS" + END + f"{username} disfruta del dia!")
         elif dias_restantes == 359:
             print(f"Que tal te fue en tu cumpleaños de ayer {username}?")
 
@@ -35,16 +36,16 @@ def pedir_birth():
     # Aqui implementare la logica donde le pedire al usuario su fecha de cumpleaños
     while True:
         #Se le pide al usuario el birthday
-        fecha = input("[¡] Introduce tu fecha de nacimiento DD/MM/YYYY (ejemplo: 31/12/2015): ") 
+        fecha = input(QST + " Introduce tu fecha de nacimiento DD/MM/YYYY (ejemplo: 31/12/2015): ") 
     
         try:
             #Comprobamos que la fecha este en el formato indicado
             birth = datetime.strptime(fecha, '%d/%m/%Y')
             if birth > datetime.today():
-                print("[X] No puedes tener edad negativa o igual a 0\n")
+                print(FATAL+RED+"No puedes tener edad negativa o igual a 0\n"+END)
                 continue
             else:
-                confirm = input(f"[?] Entonces la fecha es {fecha} correcto? (Y/N)") 
+                confirm = input(QST+ f" Entonces la fecha es {fecha} correcto? (Y/N)") 
                 
                 if confirm == "y" or confirm == "Y":
                     return fecha
@@ -53,7 +54,7 @@ def pedir_birth():
         
         except ValueError:
             
-            print("[X] Formato no reconocido, por favor intentalo denuevo\n")
+            print(FATAL + " Formato no reconocido, por favor intentalo denuevo\n")
 
 
 def create_json(): 
@@ -121,7 +122,7 @@ if __name__ == "__main__":
     try:    
         first_init() #Ejecutamos el script
     except KeyboardInterrupt:
-        print("\n[!] Saliendo...")
+        print("\n" + FATAL + RED + " Saliendo..." + END)
         exit(1)
 
 
